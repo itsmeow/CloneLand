@@ -1,0 +1,16 @@
+[
+{
+  "modid": "cloneland",
+  "name": "Clone Land",
+  "description": "This mod adds another dimension to Minecraft, but a complete clone of the one you're in... Imagine, just swapping dimensions instantly by clicking on an item... spooky.",
+  "version": "1.4",
+  "mcversion": "1.12",
+  "url": "",
+  "updateUrl": "https://minecraft.curseforge.com/projects/cloneland",
+  "authorList": ["its_meow"],
+  "credits": "its_meow, for programming, ideas, design, texturing, and leading(formerly known as hiotewdew)",
+  "logoFile": "cloneland.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]
