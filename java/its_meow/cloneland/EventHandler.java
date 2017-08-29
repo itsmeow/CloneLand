@@ -23,11 +23,9 @@ public class EventHandler {
 	public void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
 		EntityPlayer player = event.player;
 		World world = player.getEntityWorld();
-		if(world.isRemote) {
-			player.sendMessage(new TextComponentString("You are running CloneLand " + Ref.VERSION + " by its_meow!"));
-		}
 		if(!world.isRemote) {
 			boolean antiGrief = CloneConfig.antiGrief;
+			player.sendMessage(new TextComponentString("You are running CloneLand " + Ref.VERSION + " by its_meow!"));
 			player.sendMessage(new TextComponentString(antiGrief ? "AntiGrief is enabled, you cannot place teleporters in blocks that exist in the opposite dimension!" : "AntiGrief is disabled!"));
 		}
 	}
