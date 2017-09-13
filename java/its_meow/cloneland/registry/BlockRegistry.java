@@ -33,7 +33,8 @@ public class BlockRegistry {
 	@Mod.EventBusSubscriber
 	public static class RegistrationHandler {
 		public static final Set<ItemBlock> ITEM_BLOCKS = new HashSet<>();
-
+		
+		
 		/**
 		 * Register this mod's {@link Block}s.
 		 *
