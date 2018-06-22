@@ -51,17 +51,17 @@ public class BlockClonePortal extends Block  {
 		EntityPlayer player = world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 20, false); //Attempt to get player
 		if(!world.isRemote) { //Server thread only
 			boolean antiGrief = CloneConfig.antiGrief;
-			
+
 			int curWorldId = TeleportController.getInstance().getDimensionID(world);
 			int destWorld = TeleportController.getInstance().getMatchingDimensionID(curWorldId);
 			WorldServer destWorldServer = world.getMinecraftServer().getWorld(destWorld);
 			Block blockAtLocation = destWorldServer.getBlockState(pos).getBlock();
-			
+
 			if(antiGrief && !(blockAtLocation == Blocks.AIR)) { //Opposite block isn't air and griefprotect is on
 				player.sendMessage(new TextComponentString("You cannot place there as a block exists there in the opposite world and Grief Protection is active."));
 				return false; //Block cannot be placed
 			}
-			
+
 		}
 		return true; //Block is placed
 	}
@@ -70,19 +70,20 @@ public class BlockClonePortal extends Block  {
 
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-		placer.getEntityWorld().setBlockState(pos, state.withProperty(FACING, EnumFacing.NORTH), 2);
-		EntityPlayer player = (EntityPlayer) placer;
-		
-		int curWorldId = TeleportController.getInstance().getDimensionID(worldIn);
-		int destWorld = TeleportController.getInstance().getMatchingDimensionID(curWorldId);
-		WorldServer destWorldServer = worldIn.getMinecraftServer().getWorld(destWorld);
-		
-		Block blockAtLocation = destWorldServer.getBlockState(pos).getBlock();
-		
-		destWorldServer.setBlockToAir(pos);
-		IBlockState statenew = BlockRegistry.cloneportal.getDefaultState();
-		destWorldServer.setBlockState(pos, statenew.withProperty(FACING, EnumFacing.NORTH));
+		if(!worldIn.isRemote) {
+			placer.getEntityWorld().setBlockState(pos, state.withProperty(FACING, EnumFacing.NORTH), 2);
+			EntityPlayer player = (EntityPlayer) placer;
 
+			int curWorldId = TeleportController.getInstance().getDimensionID(worldIn);
+			int destWorld = TeleportController.getInstance().getMatchingDimensionID(curWorldId);
+			WorldServer destWorldServer = worldIn.getMinecraftServer().getWorld(destWorld);
+
+			Block blockAtLocation = destWorldServer.getBlockState(pos).getBlock();
+
+			destWorldServer.setBlockToAir(pos);
+			IBlockState statenew = BlockRegistry.cloneportal.getDefaultState();
+			destWorldServer.setBlockState(pos, statenew.withProperty(FACING, EnumFacing.NORTH));
+		}
 
 	}
 
