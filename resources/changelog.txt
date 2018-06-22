@@ -1,4 +1,17 @@
 -
+v1.7
+ -Added new Clone Dimension for The Nether! (Dimension ID customizable as well)
+ -Redid crafting recipes to balance teleporter block (more expensive)
+ -Added Dimensional Core (for crafting)
+ -Updated to newer Forge version
+ -Rewrite of teleportation logic with singleton class to prevent copy-pasting code
+ -It will now be easier to add new clone dimensions due to rewrite
+
+-
+v1.6
+ -Updated to 1.12.2
+
+-
 v1.5
  -Updated to 1.12.1
  -Had to remove "is staff expensive" option in config due to recipe registration changes by Forge.
