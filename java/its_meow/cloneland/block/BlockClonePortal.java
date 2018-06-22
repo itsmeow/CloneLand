@@ -69,14 +69,14 @@ public class BlockClonePortal extends Block  {
 
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-		worldIn.setBlockState(pos, state.withProperty(FACING, EnumFacing.NORTH), 2);
+		placer.getEntityWorld().setBlockState(pos, state.withProperty(FACING, EnumFacing.NORTH), 2);
 		EntityPlayer player = (EntityPlayer) placer;
 		
-		int curWorldId = worldIn.getWorldType().getId();
+		int curWorldId = placer.getEntityWorld().getWorldType().getId();
 		System.out.println(curWorldId);
 		int destWorld = TeleportController.getInstance().getMatchingDimensionID(curWorldId);
 		System.out.println(destWorld);
-		WorldServer destWorldServer = worldIn.getMinecraftServer().getWorld(destWorld);
+		WorldServer destWorldServer = placer.getEntityWorld().getMinecraftServer().getWorld(destWorld);
 		
 		Block blockAtLocation = destWorldServer.getBlockState(pos).getBlock();
 		
