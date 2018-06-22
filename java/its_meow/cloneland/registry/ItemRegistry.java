@@ -22,12 +22,6 @@ public class ItemRegistry {
 	public static ItemDimensionTeleporter teleporter = new ItemDimensionTeleporter();
 	public static ItemDimensionalCore core = new ItemDimensionalCore();
 	
-	@SideOnly(Side.CLIENT)
-	public static void initModels(){
-		core.initModel();
-		teleporter.initModel();
-	}
-	
 	@Mod.EventBusSubscriber
 	public static class RegistrationHandler {
 		public static final Set<Item> ITEMS = new HashSet<>();
@@ -55,14 +49,10 @@ public class ItemRegistry {
 		
 		@SubscribeEvent
 		public static void registerItemBlockModels(final ModelRegistryEvent event) {
-			initModel(core, 0);
-			initModel(teleporter, 0);
+			core.initModel();
+			teleporter.initModel();
 		}
 		
-		
-	    public static void initModel(Item item, int meta) {
-	        ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(item.getRegistryName(), "inventory"));
-	    }
 	}
 
 	

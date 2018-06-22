@@ -45,14 +45,14 @@ public class TeleportController {
 		} else{
 			//Is Client
 			if(playerIn.getRidingEntity() == null | false && playerIn.isBeingRidden() == false && playerIn instanceof EntityPlayer) {
-				if (playerIn.dimension == 0){
+				if (playerIn.dimension == 0){ //Going to CL
 					playerIn.sendMessage(new TextComponentString("Dimension is now Clone Land."));
-				} else if (playerIn.dimension == CloneConfig.dimensionId){
+				} else if (playerIn.dimension == CloneConfig.dimensionId){ //Going to OVW
 					playerIn.sendMessage(new TextComponentString("Dimension is now Overworld."));
-				} else if (playerIn.dimension == -1) {
-					playerIn.sendMessage(new TextComponentString("Dimension is now Nether."));
-				} else if (playerIn.dimension == CloneConfig.dimensionId2) {
+				} else if (playerIn.dimension == -1) { //Going to CLN
 					playerIn.sendMessage(new TextComponentString("Dimension is now Clone Nether."));
+				} else if (playerIn.dimension == CloneConfig.dimensionId2) { //Going to NTR
+					playerIn.sendMessage(new TextComponentString("Dimension is now Nether."));
 				}
 			}
 		}
@@ -61,12 +61,16 @@ public class TeleportController {
 	public int getMatchingDimensionID(int in) {
 		if(in == 0)
 			return CloneConfig.dimensionId;
+		
 		if(in == -1)
 			return CloneConfig.dimensionId2;
+		
 		if(in == CloneConfig.dimensionId)
 			return 0;
+		
 		if(in == CloneConfig.dimensionId2)
 			return -1;
+		
 		return 0;
 	}
 	

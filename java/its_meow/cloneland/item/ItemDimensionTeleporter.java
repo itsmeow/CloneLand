@@ -3,7 +3,6 @@ package its_meow.cloneland.item;
 import its_meow.cloneland.CloneLandMod;
 import its_meow.cloneland.TeleportController;
 import its_meow.cloneland.config.CloneConfig;
-import its_meow.cloneland.dimension.clone.CloneTeleporter;
 import its_meow.cloneland.proxy.CommonProxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
