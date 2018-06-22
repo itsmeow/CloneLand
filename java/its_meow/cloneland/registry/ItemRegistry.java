@@ -24,8 +24,8 @@ public class ItemRegistry {
 	
 	@SideOnly(Side.CLIENT)
 	public static void initModels(){
-		teleporter.initModel();
 		core.initModel();
+		teleporter.initModel();
 	}
 	
 	@Mod.EventBusSubscriber
@@ -55,8 +55,8 @@ public class ItemRegistry {
 		
 		@SubscribeEvent
 		public static void registerItemBlockModels(final ModelRegistryEvent event) {
-			initModel(teleporter, 0);
 			initModel(core, 0);
+			initModel(teleporter, 0);
 		}
 		
 		

@@ -1,6 +1,6 @@
 
 {
-  "parent": "item/handheld",
+  "parent": "builtin/generated",
   "textures": {
     "layer0": "cloneland:items/dimensionalcore"
   }

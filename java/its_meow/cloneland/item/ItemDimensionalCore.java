@@ -43,8 +43,9 @@ public class ItemDimensionalCore extends Item {
 	@Override
 	 public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn){
 		ItemStack itemstack = playerIn.getHeldItem(handIn);
-		
-		playerIn.sendMessage(new TextComponentString("You can feel its power emanating from within."));
+		if(worldIn.isRemote) {
+			playerIn.sendMessage(new TextComponentString("You can feel its power emanating from within."));
+		}
 		
 		return ActionResult.newResult(EnumActionResult.PASS, itemstack);
 	}
