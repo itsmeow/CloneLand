@@ -30,28 +30,21 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemDimensionTeleporter extends Item {
+public class ItemDimensionalCore extends Item {
 
 	
-	public ItemDimensionTeleporter() {
-		this.setRegistryName("teleporter");
+	public ItemDimensionalCore() {
+		this.setRegistryName("dimensionalcore");
 		this.setCreativeTab(CloneLandMod.tab_cloneland);
-		this.setUnlocalizedName("teleporter");
+		this.setUnlocalizedName("dimensionalcore");
 		this.setMaxStackSize(1);
-		
-
-		this.setMaxDamage(CloneConfig.configMaxDamage);
-	}
-	
-	protected boolean canRepair(){
-		return true;
 	}
 	
 	@Override
 	 public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn){
 		ItemStack itemstack = playerIn.getHeldItem(handIn);
 		
-		TeleportController.getInstance().teleport(worldIn, playerIn, true, handIn);
+		playerIn.sendMessage(new TextComponentString("You can feel its power emanating from within."));
 		
 		return ActionResult.newResult(EnumActionResult.PASS, itemstack);
 	}

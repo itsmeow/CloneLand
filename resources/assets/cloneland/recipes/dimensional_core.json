@@ -1,29 +1,29 @@
 {
     "_comment": [
-        "Create a block capable of inter-dimensional travel."
+        "Create a unharnessed core capable of inter-dimensional travel once contained."
     ],
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        "DCD",
         "GDG",
-        "GGG"
+        "DED",
+        "GDG"
     ],
     "key": {
         "G": {
-            "item": "minecraft:gold_block",
+            "item": "minecraft:gold_ingot",
             "data": 0
         },
         "D": {
-            "item": "minecraft:diamond_block",
+            "item": "minecraft:diamond",
             "data": 0
         },
-        "C": {
-            "item": "minecraft:dimensionalcore",
+        "E": {
+            "item": "minecraft:ender_pearl",
             "data": 0
         }
     },
     "result": {
-        "item": "cloneland:cloneportalblock",
+        "item": "cloneland:dimensionalcore",
         "data": 0,
         "count": 1
     }

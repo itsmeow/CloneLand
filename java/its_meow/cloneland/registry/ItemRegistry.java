@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import its_meow.cloneland.item.ItemDimensionTeleporter;
+import its_meow.cloneland.item.ItemDimensionalCore;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -19,10 +20,12 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class ItemRegistry {
 
 	public static ItemDimensionTeleporter teleporter = new ItemDimensionTeleporter();
+	public static ItemDimensionalCore core = new ItemDimensionalCore();
 	
 	@SideOnly(Side.CLIENT)
 	public static void initModels(){
 		teleporter.initModel();
+		core.initModel();
 	}
 	
 	@Mod.EventBusSubscriber
@@ -37,7 +40,8 @@ public class ItemRegistry {
 		@SubscribeEvent
 		public static void registerItems(final RegistryEvent.Register<Item> event) {
 			final Item[] items = {
-					teleporter
+					teleporter,
+					core
 			};
 			
 			
@@ -52,6 +56,7 @@ public class ItemRegistry {
 		@SubscribeEvent
 		public static void registerItemBlockModels(final ModelRegistryEvent event) {
 			initModel(teleporter, 0);
+			initModel(core, 0);
 		}
 		
 		

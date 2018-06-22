@@ -14,6 +14,7 @@ public class CloneConfig {
 	
 	//public static boolean isExpensive = true;
 	public static int dimensionId = 5705;
+	public static int dimensionId2 = 5706;
 	public static int configMaxDamage = 150;
 	public static int damageToDo = 1;
 	public static boolean antiGrief = true;
@@ -40,6 +41,7 @@ public class CloneConfig {
         configMaxDamage = cfg.getInt("teleporterhealth", cI, configMaxDamage, 50, 500, "The total amount of damage the item can take.(Allows: 50-500)");
         damageToDo = cfg.getInt("teleporterdamageperuse", cI, damageToDo, 1, 50, "The total amount of damage given to the item when used.(Allows:1-50)");
         dimensionId = cfg.getInt("dimensionId", cD, dimensionId, 2, 9999, "Set the dimension's ID. Don't really change unless you are having incompatabilites. WARNING: Changing dimension ID WILL cause you to lose built structures within the clone dimension. They can be regained if you change the ID back.");
+        dimensionId2 = cfg.getInt("dimensionId2", cD, dimensionId2, 2, 9999, "Set the nether dimension's ID. Don't really change unless you are having imcompatibilites. WARNING: Changing dimension ID WILL cause you to lose built structures within the clone dimension. They can be regained if you change the ID back.");
         antiGrief = cfg.getBoolean("antigriefon", cM, antiGrief, "Stop griefing by clone teleporter blocks.");
 	}
 	

@@ -1,6 +1,7 @@
 package its_meow.cloneland.block;
 
 import its_meow.cloneland.CloneLandMod;
+import its_meow.cloneland.TeleportController;
 import its_meow.cloneland.config.CloneConfig;
 import its_meow.cloneland.dimension.clone.CloneTeleporter;
 import its_meow.cloneland.registry.BlockRegistry;
@@ -132,24 +133,7 @@ public class BlockClonePortal extends Block  {
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
-		if(!worldIn.isRemote){
-			if (playerIn instanceof EntityPlayerMP){
-				EntityPlayerMP playerMP = (EntityPlayerMP)playerIn;
-				if (playerIn.getRidingEntity() == null | false && playerIn.isBeingRidden() == false && playerIn instanceof EntityPlayer && playerMP.dimension != CloneConfig.dimensionId && playerMP.dimension == 0){
-					playerMP.mcServer.getPlayerList().transferPlayerToDimension(playerMP, CloneConfig.dimensionId, new CloneTeleporter(playerIn.getServer().getWorld(CloneConfig.dimensionId)));
-				} else if (playerIn.getRidingEntity() == null | false && playerIn.isBeingRidden() == false && playerIn instanceof EntityPlayer && playerMP.dimension != 0 && playerMP.dimension == CloneConfig.dimensionId){
-					playerMP.mcServer.getPlayerList().transferPlayerToDimension(playerMP, 0, new CloneTeleporter(playerIn.getServer().getWorld(0)));
-				}
-			}
-		} else{
-			//Is Client
-			if (playerIn.getRidingEntity() == null | false && playerIn.isBeingRidden() == false && playerIn instanceof EntityPlayer && playerIn.dimension != CloneConfig.dimensionId && playerIn.dimension == 0){
-				playerIn.sendMessage(new TextComponentString("Dimension is now Clone Land."));
-			} else if (playerIn.getRidingEntity() == null | false && playerIn.isBeingRidden() == false && playerIn instanceof EntityPlayer && playerIn.dimension != 0 && playerIn.dimension == CloneConfig.dimensionId){
-				playerIn.sendMessage(new TextComponentString("Dimension is now Overworld."));
-			}
-		}
-
+		TeleportController.getInstance().teleport(worldIn, playerIn, false, null);
 		return true;
 	}
 
