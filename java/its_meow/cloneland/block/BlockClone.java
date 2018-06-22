@@ -1,5 +1,6 @@
 package its_meow.cloneland.block;
 
+import its_meow.cloneland.TeleportController;
 import its_meow.cloneland.config.CloneConfig;
 import its_meow.cloneland.registry.BlockRegistry;
 import net.minecraft.block.Block;
@@ -29,23 +30,17 @@ public class BlockClone extends Block {
 		EntityPlayer player = world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 20, false); //Attempt to get player
 		if(!world.isRemote) { //Server thread only
 			boolean antiGrief = CloneConfig.antiGrief;
-			WorldServer clonelandserver = world.getMinecraftServer().getWorld(CloneConfig.dimensionId);
-			WorldServer worldserver0 = world.getMinecraftServer().getWorld(0);
-			if(world == clonelandserver) { //If placement was in CloneLand
-				Block blockAtLocation = worldserver0.getBlockState(pos).getBlock(); //Block at same location in Overworld
-				//For debugs: System.out.println("pre tester placed in clone but overworld has " + blockAtLocation);
-				if(antiGrief && !(blockAtLocation == Blocks.AIR)) { //Opposite block isn't air and griefprotect is on
-					player.sendMessage(new TextComponentString("You cannot place there as a block exists there in the Overworld and Grief Protection is active."));
-					return false; //Block cannot be placed
-				}
-			} else if(world == worldserver0) { //If placement was in Overworld
-				Block blockAtLocation = clonelandserver.getBlockState(pos).getBlock(); //Block at same location in CloneLand
-				//For debugs: System.out.println("pre tester placed in Overworld but clone has " + blockAtLocation);
-				if(antiGrief && !(blockAtLocation == Blocks.AIR)) { //Opposite block isn't air and griefprotect is on
-					player.sendMessage(new TextComponentString("You cannot place there as a block exists there in the Overworld and Grief Protection is active."));
-					return false; //Block cannot be placed
-				}
+			
+			int curWorldId = TeleportController.getInstance().getDimensionID(world);
+			int destWorld = TeleportController.getInstance().getMatchingDimensionID(curWorldId);
+			WorldServer destWorldServer = world.getMinecraftServer().getWorld(destWorld);
+			Block blockAtLocation = destWorldServer.getBlockState(pos).getBlock();
+			
+			if(antiGrief && !(blockAtLocation == Blocks.AIR)) { //Opposite block isn't air and griefprotect is on
+				player.sendMessage(new TextComponentString("You cannot place there as a block exists there in the opposite world and Grief Protection is active."));
+				return false; //Block cannot be placed
 			}
+			
 		}
 		return true; //Block is placed
 	}
@@ -54,39 +49,33 @@ public class BlockClone extends Block {
 
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-		worldIn.setBlockState(pos, state, 2);
+		worldIn.setBlockState(pos, this.getDefaultState());
 		EntityPlayer player = (EntityPlayer) placer;
-		boolean antiGrief = CloneConfig.antiGrief;
-		if(!worldIn.isRemote) {
-			WorldServer clonelandserver = worldIn.getMinecraftServer().getWorld(CloneConfig.dimensionId);
-			WorldServer worldserver0 = worldIn.getMinecraftServer().getWorld(0);
-			if(worldIn == worldserver0) {
-				Block blockAtLocation = clonelandserver.getBlockState(pos).getBlock();
-				clonelandserver.setBlockToAir(pos);
-				IBlockState statenew = BlockRegistry.cloneportal.getDefaultState();
-				clonelandserver.setBlockState(pos, statenew);
+		
+		int curWorldId = TeleportController.getInstance().getDimensionID(worldIn);
+		int destWorld = TeleportController.getInstance().getMatchingDimensionID(curWorldId);
+		WorldServer destWorldServer = worldIn.getMinecraftServer().getWorld(destWorld);
+		
+		Block blockAtLocation = destWorldServer.getBlockState(pos).getBlock();
+		
+		destWorldServer.setBlockToAir(pos);
+		IBlockState statenew = this.getDefaultState();
+		destWorldServer.setBlockState(pos, statenew);
 
-			} else if(worldIn == clonelandserver) {
-				Block blockAtLocation = worldserver0.getBlockState(pos).getBlock();
-				worldserver0.setBlockToAir(pos);
-				IBlockState statenew = BlockRegistry.cloneportal.getDefaultState();
-				worldserver0.setBlockState(pos, statenew);
-			}
-		}
 
 	}
-	
+
+
+
+
 	@Override
 	public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos,
 			IBlockState state) {
 		if(!worldIn.isRemote) {
-			WorldServer clonelandserver = worldIn.getMinecraftServer().getWorld(CloneConfig.dimensionId);
-			WorldServer worldserver0 = worldIn.getMinecraftServer().getWorld(0);
-			if(worldIn == worldserver0) {
-				clonelandserver.setBlockToAir(pos);
-			} else if(worldIn == clonelandserver) {
-				worldserver0.setBlockToAir(pos);
-			}
+			int curWorldId = TeleportController.getInstance().getDimensionID(worldIn);
+			int destWorld = TeleportController.getInstance().getMatchingDimensionID(curWorldId);
+			WorldServer destWorldServer = worldIn.getMinecraftServer().getWorld(destWorld);
+			destWorldServer.setBlockToAir(pos);
 		}
 		super.onBlockDestroyedByPlayer(worldIn, pos, state);
 	}
@@ -95,13 +84,10 @@ public class BlockClone extends Block {
 	public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos,
 			Explosion explosionIn) {
 		if(!worldIn.isRemote) {
-			WorldServer clonelandserver = worldIn.getMinecraftServer().getWorld(CloneConfig.dimensionId);
-			WorldServer worldserver0 = worldIn.getMinecraftServer().getWorld(0);
-			if(worldIn == worldserver0) {
-				clonelandserver.setBlockToAir(pos);
-			} else if(worldIn == clonelandserver) {
-				worldserver0.setBlockToAir(pos);
-			}
+			int curWorldId = TeleportController.getInstance().getDimensionID(worldIn);
+			int destWorld = TeleportController.getInstance().getMatchingDimensionID(curWorldId);
+			WorldServer destWorldServer = worldIn.getMinecraftServer().getWorld(destWorld);
+			destWorldServer.setBlockToAir(pos);
 		}
 		super.onBlockDestroyedByExplosion(worldIn, pos, explosionIn);
 	}

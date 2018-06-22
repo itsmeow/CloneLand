@@ -52,7 +52,7 @@ public class BlockClonePortal extends Block  {
 		if(!world.isRemote) { //Server thread only
 			boolean antiGrief = CloneConfig.antiGrief;
 			
-			int curWorldId = world.getWorldType().getId();
+			int curWorldId = TeleportController.getInstance().getDimensionID(world);
 			int destWorld = TeleportController.getInstance().getMatchingDimensionID(curWorldId);
 			WorldServer destWorldServer = world.getMinecraftServer().getWorld(destWorld);
 			Block blockAtLocation = destWorldServer.getBlockState(pos).getBlock();
@@ -74,11 +74,8 @@ public class BlockClonePortal extends Block  {
 		EntityPlayer player = (EntityPlayer) placer;
 		
 		int curWorldId = TeleportController.getInstance().getDimensionID(worldIn);
-		System.out.println(curWorldId);
 		int destWorld = TeleportController.getInstance().getMatchingDimensionID(curWorldId);
-		System.out.println(destWorld);
-		MinecraftServer thisMS = worldIn.getMinecraftServer();
-		WorldServer destWorldServer = thisMS.getWorld(destWorld);
+		WorldServer destWorldServer = worldIn.getMinecraftServer().getWorld(destWorld);
 		
 		Block blockAtLocation = destWorldServer.getBlockState(pos).getBlock();
 		
@@ -96,7 +93,7 @@ public class BlockClonePortal extends Block  {
 	public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos,
 			IBlockState state) {
 		if(!worldIn.isRemote) {
-			int curWorldId = worldIn.getWorldType().getId();
+			int curWorldId = TeleportController.getInstance().getDimensionID(worldIn);
 			int destWorld = TeleportController.getInstance().getMatchingDimensionID(curWorldId);
 			WorldServer destWorldServer = worldIn.getMinecraftServer().getWorld(destWorld);
 			destWorldServer.setBlockToAir(pos);
@@ -108,7 +105,7 @@ public class BlockClonePortal extends Block  {
 	public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos,
 			Explosion explosionIn) {
 		if(!worldIn.isRemote) {
-			int curWorldId = worldIn.getWorldType().getId();
+			int curWorldId = TeleportController.getInstance().getDimensionID(worldIn);
 			int destWorld = TeleportController.getInstance().getMatchingDimensionID(curWorldId);
 			WorldServer destWorldServer = worldIn.getMinecraftServer().getWorld(destWorld);
 			destWorldServer.setBlockToAir(pos);
