@@ -74,5 +74,8 @@ public class TeleportController {
 		return 0;
 	}
 	
+	public int getDimensionID(World worldIn) {
+		return worldIn.provider.getDimensionType().getId();
+	}
 
 }

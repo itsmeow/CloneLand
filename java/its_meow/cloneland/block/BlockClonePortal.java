@@ -17,6 +17,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -72,11 +73,12 @@ public class BlockClonePortal extends Block  {
 		placer.getEntityWorld().setBlockState(pos, state.withProperty(FACING, EnumFacing.NORTH), 2);
 		EntityPlayer player = (EntityPlayer) placer;
 		
-		int curWorldId = placer.getEntityWorld().getWorldType().getId();
+		int curWorldId = TeleportController.getInstance().getDimensionID(worldIn);
 		System.out.println(curWorldId);
 		int destWorld = TeleportController.getInstance().getMatchingDimensionID(curWorldId);
 		System.out.println(destWorld);
-		WorldServer destWorldServer = placer.getEntityWorld().getMinecraftServer().getWorld(destWorld);
+		MinecraftServer thisMS = worldIn.getMinecraftServer();
+		WorldServer destWorldServer = thisMS.getWorld(destWorld);
 		
 		Block blockAtLocation = destWorldServer.getBlockState(pos).getBlock();
 		
