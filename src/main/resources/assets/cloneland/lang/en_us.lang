@@ -1,0 +1,7 @@
+#Creative Tabs
+itemGroup.CloneLand=Clone Land
+#Items
+item.cloneland.teleporter.name=Clone Land Teleporter
+item.cloneland.dimensionalcore.name=Dimensional Core
+#Blocks
+tile.cloneland.cloneportalblock.name=Clone Portal Block

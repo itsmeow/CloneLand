@@ -1,0 +1,13 @@
+
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "particle": "cloneland:blocks/cloneportalblocksides",
+    "down": "cloneland:blocks/cloneportalblockbottom",
+    "up": "cloneland:blocks/cloneportalblocktop",
+    "east": "cloneland:blocks/cloneportalblocksides",
+    "west": "cloneland:blocks/cloneportalblocksides",
+    "north": "cloneland:blocks/cloneportalblocksides",
+    "south": "cloneland:blocks/cloneportalblocksides"
+  }
+}

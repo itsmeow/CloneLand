@@ -1,0 +1,54 @@
+-
+v1.7
+ -Added new Clone Dimension for The Nether! (Dimension ID customizable as well)
+ -Redid crafting recipes to balance teleporter block (more expensive)
+ -Added Dimensional Core (for crafting)
+ -Updated to newer Forge version
+ -Rewrite of teleportation logic with singleton class to prevent copy-pasting code
+ -It will now be easier to add new clone dimensions due to rewrite
+
+-
+v1.6
+ -Updated to 1.12.2
+
+-
+v1.5
+ -Updated to 1.12.1
+ -Had to remove "is staff expensive" option in config due to recipe registration changes by Forge.
+ -Rewrite of item registration and crafting.
+ -Slight internal adjustments.
+ -Added new "Anti Grief" mode (on by default, change in config) to prevent clone teleporters from destroying blocks in the opposite dimension.
+ 
+-
+v1.2.2
+ -Semi-Clone(Land) (haha puns) of v1.4 for MC 1.11.2 due to it still being dominant.
+ -(Has no update checker)
+ -Basically just added the Clone Portal Block.
+
+-
+v1.4
+ -Removed mod menu config GUI
+ -Added Clone Portal Block, a cheaper dimension swapper that doesn't break!
+ -Fixed version range parsing error
+
+-
+v1.3
+-Updated to 1.12
+-Added temporary solution to forge's broken crafting recipe system.
+-Added update checker for future releases
+-Half implemented mod menu config GUI, I was in a rush.
+
+-
+v1.2.1
+-Fixed item model.
+
+-
+v1.2
+-Added damage to teleporter, uses 1/150 of durability per use.
+-Teleporter is repairable.
+-Added configuration and options to change dimension ID, cost of teleporter, the health/durability of the teleporter, and the damage dealt per use of the teleporter.
+
+-
+v1.1
+-Fixed recipe to be more balanced with the game. Now made entirely out of the respective blocks, with emerald and diamond positions swapped.
+-Changed texture to match new recipe.

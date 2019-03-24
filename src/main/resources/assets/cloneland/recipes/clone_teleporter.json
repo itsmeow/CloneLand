@@ -1,0 +1,30 @@
+{
+    "_comment": [
+		"Create an item capable of inter-dimensional travel."
+	],
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" DC",
+		" GD",
+		"G  "
+	],
+	"key": {
+		"G": {
+			"item": "minecraft:gold_block",
+			"data": 0
+		},
+		"D": {
+		    "item": "minecraft:diamond",
+			"data": 0
+		},
+		"C": {
+		    "item": "cloneland:dimensionalcore",
+			"data": 0
+		}
+	},
+	"result": {
+	    "item": "cloneland:teleporter",
+		"data": 0,
+		"count": 1
+	}
+}
